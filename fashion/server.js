@@ -8,17 +8,16 @@ const app = express()
 dotenv.config();
 
 app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extends : true }));
 
-app.use(express.urlencoded({extends : true}));
-
-app.use("api/am", contactRoutes)
+app.use("/api/am", contactRoutes)
 
 
 app.get("/",(req,res)=>{
 console.log("hi this ganesh")
 res.send("fasion AM")
 
- 
 })
 
 const PORT = 5000;
