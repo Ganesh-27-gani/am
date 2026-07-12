@@ -13,7 +13,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extends : true }));
 
-app.use("/api/am", contactRoutes)
+app.use("/api/amfashion", contactRoutes)
 
 app.get("/",(req,res)=>{
 console.log("hi this ganesh")
