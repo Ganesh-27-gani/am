@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const contactSchema = new mongoose.Schema({
 
-    fullname: {
+    fullName: {
         type: String,
         required: true,
         trim: true,
