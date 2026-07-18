@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const authSchema = new mongoose.Schema({
+ export const authSchema = new mongoose.Schema({
 
     name: {
         type: String,
@@ -34,7 +34,7 @@ const authSchema = new mongoose.Schema({
     otpExpires: Date,
 
     isVerified: {
-        type: true,
+        type: Boolean,
         default: false,
     },
     role: {
@@ -49,3 +49,5 @@ const authSchema = new mongoose.Schema({
     },
 
 );
+
+ 
