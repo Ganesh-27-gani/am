@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extends : true }));
 
 app.use("/api/amfashion", contactRoutes)
-app.use("api/amfashion", authroutes)
+app.use("api/auth/amfashion", authroutes)
 
 app.get("/",(req,res)=>{
 console.log("hi this ganesh")
