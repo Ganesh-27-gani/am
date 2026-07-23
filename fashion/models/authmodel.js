@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 
- export const authSchema = new mongoose.Schema({
+  const authSchema = new mongoose.Schema({
 
-    name: {
+    fullName: {
         type: String,
         required: true,
         trim: true,
@@ -30,6 +30,7 @@ import mongoose from "mongoose";
         enum: ["email", "phone"],
         default: "email",
     },
+
     otp: String,
     otpExpires: Date,
 
@@ -50,4 +51,6 @@ import mongoose from "mongoose";
 
 );
 
- 
+ const Auth = mongoose.model("auth", authSchema);
+
+ export default Auth; 
