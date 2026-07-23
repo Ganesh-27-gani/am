@@ -1,4 +1,4 @@
-import { authSchema } from "../models/authmodel.js";
+import Auth from "../models/authmodel.js";
 
 export const register = async (req, res) => {
 
@@ -6,16 +6,18 @@ export const register = async (req, res) => {
 
         const { fullName, email, phone, password, verifyMethod } = req.body;
 
-        if (!fullName || !email || !phone || !password || verifyMethod) {
+        if (!fullName || !email || !phone || !password || !verifyMethod) {
             return res.status(400).json({ success: false, message: "All felds are required" });
 
-            const emailExists = await authSchema.findOne({ email });
+        }
+
+            const emailExists = await Auth.findOne({ email });
             
             if(emailExists){
                 return res.status(400).json({success : false, message : "email already exists"});
             };
 
-            const phoneExists = await authSchema.findOne({ phone })
+            const phoneExists = await Auth.findOne({ phone })
 
             if(phoneExists){
                 return res.status(400).json({success : false, message : "Phone number alredy exists"});
@@ -24,9 +26,9 @@ export const register = async (req, res) => {
 
             const otp = Math.floor(100000 + Math.random() * 900000).toString();
 
-            const otpExpires = new Date(Date.new() + 5 * 60 * 1000);
+            const otpExpires = new Date(Date.now() + 5 * 60 * 1000);
 
-            const user = await authSchema.creat({
+            const user = await Auth.create({
                 fullName,
                 email,
                 phone,
@@ -44,11 +46,9 @@ export const register = async (req, res) => {
             }
              
 
-        }
-
-        return res.stetus(200).json({success : true , message : "Otp sent successfully ${verifyMethod}" })
+        return res.status(200).json({success : true , message : `Otp sent successfully ${verifyMethod}` })
 
     } catch (err) {
-      res.status(501).json({success : false, message : err.message});
+      res.status(500).json({success : false, message : err.message});
     }
 }
