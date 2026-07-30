@@ -1,4 +1,6 @@
 import Auth from "../models/authmodel.js";
+import sendEmail from "../Utils/sendOTP.js";
+import sendPhoneOTP from "../Utils/sendPhone.js";
 
 export const register = async (req, res) => {
 
@@ -39,9 +41,12 @@ export const register = async (req, res) => {
             });
 
             if(verifyMethod == "email"){
-                console.log(`Email OTP : ${otp}`)
+                //console.log(`Email OTP : ${otp}`)
+                await sendEmail(email, otp);
             }else{
-                console.log(`Phone OTP ${otp}`);
+               // console.log(`Phone OTP ${otp}`);
+
+               await sendPhoneOTP(phone, otp);
                 
             }
              
