@@ -13,11 +13,11 @@ export const verifyOTP = async (req, res) => {
             ]
         });
 
-        if (!user) {
+        if(!user) {
             return res.status(404).json({ success: false, message: "User not found" });
         }
 
-        if (user.otp !== otp) {
+        if(user.otp !== otp) {
             return res.status(400).json({ success: false, message: "Invalid OTP" });
         }
 
@@ -41,11 +41,9 @@ export const verifyOTP = async (req, res) => {
                 expiresIn : "7d"
             }
         );
-
-        req.status(200).json({success : true, message : "Verification successful", token})
+        res.status(200).json({success : true, message : "Verification successful", token})
        
-
-    } catch (err) {
+    }catch(err) {
 
         console.log(err)
     }
