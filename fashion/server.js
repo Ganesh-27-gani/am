@@ -23,8 +23,9 @@ app.get("/", (req, res) => {
     console.log("hi this ganesh")
     res.send("fasion AM")
 
-})
-const PORT = 5000
+});
+
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
     console.log("Backend connected")
