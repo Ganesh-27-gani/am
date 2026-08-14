@@ -104,81 +104,85 @@ export const otpVerify = async (req, res) => {
     }
 }
 
-export const reSendOTP = async (req, res)=>{
+export const reSendOTP = async (req, res) => {
 
-    try{
-        const {email, phone} = req.body;
+    try {
+        const { email, phone } = req.body;
 
-        return res.status(400).json({success:false, message:"Email or Phone is required"})
-
+        if (!email && !phone) {
+            return res.status(400).json({ success: false, message: "Email or Phone is required" })
+        }
         let user;
 
-        if(email){
-           user = await Auth.findOne(email);
-        }else{
-            user = await Auth.findOne(phone)
+        if (email) {
+            user = await Auth.findOne({ email });
+        } else {
+            user = await Auth.findOne({ phone })
         }
 
-        if(!user){
-            return res.status(404).json({success:false, message:"User not found"})
+        if (!user) {
+            return res.status(404).json({ success: false, message: "User not found" })
         }
 
-        if(user.isVerified){
-            return res.status(400).json({success:false, message:"User alredy verified"});
+        if (user.isVerified) {
+            return res.status(400).json({ success: false, message: "User alredy verified" });
         }
-        
-        const otp =Math.floor(
-            100000 + Math.random * 900000
+
+        const otp = Math.floor(
+            100000 + Math.random() * 900000
         ).toString();
 
-        const toExpires = new Date(
-            Date.now() + 5 *60* 1000
+        const otpExpires = new Date(
+            Date.now() + 5 * 60 * 1000
         )
         user.otp = otp;
-        user.otpExpires = toExpires;
+        user.otpExpires = otpExpires;
 
         await user.save();
 
-        if(user.verifyMethod === email){
+        if (user.verifyMethod === "email") {
+
             await sendEmail(user.email, otp)
-        }else if(user.verifyMethod === phone){
+
+        } else if (user.verifyMethod === "phone") {
+
             await sendPhoneOTP(user.phone, otp)
         }
 
-        return res.status(200).json({success:true, message:`OTP resend successfully ${user.verifyMethod}`})
+        return res.status(200).json({ success: true, message: `OTP resend successfully via ${user.verifyMethod}` })
 
-    }catch(err){
+    } catch (err) {
         console.log(err.message)
     }
 }
 
-export const login = async (req, res) =>{
-    try{
-        const {email, phone, password} = req.body;
+export const login = async (req, res) => {
+    try {
+        const { email, phone, password } = req.body;
 
-        if(!email && !phone){
-        return res.status(404).json({success:false, message:"User Maile or Phone is required"});
+        if (!email && !phone) {
+            return res.status(404).json({ success: false, message: "User Maile or Phone is required" });
 
         }
 
-        if(!password){
-            return res.status(404).json({success:false, message:"Password is required"});
+        if (!password) {
+            return res.status(404).json({ success: false, message: "Password is required" });
         }
 
         let user;
 
-        if(email){
-            user = await Auth.findOne({email});
-        }else{
-            user = await Auth.findOne({phone});
+        if (email) {
+            user = await Auth.findOne({ email });
+        } else {
+            user = await Auth.findOne({ phone });
         }
 
-        if(!user){
-            return res.status(401).json({success:false, message:"User not Found"});
+        if (!user) {
+            return res.status(401).json({ success: false, message: "User not Found" });
         }
 
-        if(!user.isVerified){
-            return res.status(400).json({success:false, message:"Plece verify your account First"})
+        if (!user.isVerified) {
+            return res.status(400).json({ success: false, message: "Plece verify your account First" })
         }
 
         const isPasswordCorrect = await bcrypt.compare(
@@ -186,19 +190,21 @@ export const login = async (req, res) =>{
             user.password
         );
 
-        if(!isPasswordCorrect){
-            return res.status(401).json({success:false, message:"invalid password"})
+        if (!isPasswordCorrect) {
+            return res.status(401).json({ success: false, message: "invalid password" })
         }
 
 
-        return res.status(200).json({success:true, message:"User logged in successfully", user:{
-            id: user._id,
-            fullName:user.fullName,
-            email: user.email,
-            phone: user.phone,
-        }})
+        return res.status(200).json({
+            success: true, message: "User logged in successfully", user: {
+                id: user._id,
+                fullName: user.fullName,
+                email: user.email,
+                phone: user.phone
+            }
+        })
 
-    }catch(err){
+    } catch (err) {
         console.log(err.message)
     }
 }

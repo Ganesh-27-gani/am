@@ -7,14 +7,12 @@ import connectDB from "./config/db.js";
 import contactRoutes from "./Routes/contactRoutes.js";
 import authroutes from "./Routes/authRoutes.js";
 
-
 const app = express()
 
-connectDB()
-
 app.use(cors());
+
 app.use(express.json());
-app.use(express.urlencoded({ extends: true }));
+app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/amfashion", contactRoutes)
 app.use("/api/auth/amfashion", authroutes)
@@ -26,7 +24,16 @@ app.get("/", (req, res) => {
 });
 
 const PORT = process.env.PORT || 5000;
+const startServer = async () => {
+    try {
 
-app.listen(PORT, () => {
-    console.log("Backend connected")
-})
+        await connectDB()
+
+        app.listen(PORT, () => {
+            console.log("Backend connected")
+        })
+    } catch (err) {
+        console.log("server failed:", err.message)
+    }
+};
+startServer()
