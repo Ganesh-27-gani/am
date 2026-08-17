@@ -1,13 +1,14 @@
 import './App.css'
+import Navebar from './components/Navebar'
 import Register from './contact/Register'
-import Navebar from './Navebar'
+ 
 
 function App() {
 
 
   return (
     <>
-      <Navebar />
+      <Navebar/>
       <Register />
     </>
   )
