@@ -1,5 +1,6 @@
 import React from 'react'
 import "../styles/Navbar.css"
+import image from "../assets/image.png"
 
 const Navebar = () => {
     return (
@@ -8,8 +9,7 @@ const Navebar = () => {
 <nav className='navbar'>
     <div className='navbar-container'>
         <a href="#home" className='logo'>
-            {/* <img src=
-            "" alt="AM ENTERPRISES" /> */}
+            <img src={image} alt="AM ENTERPRISES" />
             <div className='logo-text'>
                 <h2>AM ENTERPRISES</h2>
                 <span>CONNECTING MARKETS, CREATING VALUE</span>
