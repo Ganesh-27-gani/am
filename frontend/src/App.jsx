@@ -1,4 +1,5 @@
 import './App.css'
+import Footer from './components/Footerpage'
 import Navebar from './components/Navebar'
 import Routers from './Router/Routers'
  
@@ -10,7 +11,7 @@ function App() {
     <>
       <Navebar/>
       <Routers/>
-      
+      <Footer/>
     </>
   )
 }

@@ -7,7 +7,6 @@ const About = () => {
     <section className="about-section">
       <div className="about-container">
 
-        {/* Left Content */}
         <div className="about-content">
 
           <span className="about-subtitle">
@@ -35,7 +34,6 @@ const About = () => {
 
         </div>
 
-        {/* Right Image */}
         <div className="about-image">
           <img
             src={aboutImage}
