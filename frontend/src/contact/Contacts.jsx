@@ -1,212 +1,129 @@
 import React from "react";
 import "../styles/contact.css";
 
+import {
+    FaFacebookF,
+    FaInstagram,
+    FaLinkedinIn,
+    FaYoutube,
+    FaXTwitter
+} from "react-icons/fa6";
+
 const Contacts = () => {
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        alert("Thank you! Your message has been submitted.");
+    };
+
     return (
         <section className="contact-page">
 
-            <div className="contact-container">
+            <div className="contact-wrapper">
 
-                {/* ================= LEFT SIDE ================= */}
-
-                <div className="contact-info">
-
-                    <span className="contact-small-title">
-                        CONTACT US
-                    </span>
+                <div className="contact-header">
 
                     <h1>
-                        Let's Start a
-                        <br />
-                        <span>Conversation</span>
+                        Contact <span>Us</span>
                     </h1>
 
                     <p>
-                        Have a question, business inquiry, or partnership
-                        opportunity? Get in touch with AM ENTERPRISES.
-                        Our team is ready to assist you.
+                        Please feel free to contact us and<br />
+                        we'll get back to you as soon as we can.
                     </p>
-
-
-                    <div className="contact-details">
-
-                        <div className="contact-item">
-                            <div className="contact-icon">
-                                ✉
-                            </div>
-
-                            <div>
-                                <h4>Email</h4>
-                                <p>info@amenterprises.com</p>
-                            </div>
-                        </div>
-
-
-                        <div className="contact-item">
-                            <div className="contact-icon">
-                                ☎
-                            </div>
-
-                            <div>
-                                <h4>Phone</h4>
-                                <p>+91 XXXXX XXXXX</p>
-                            </div>
-                        </div>
-
-
-                        <div className="contact-item">
-                            <div className="contact-icon">
-                                📍
-                            </div>
-
-                            <div>
-                                <h4>Location</h4>
-                                <p>India</p>
-                            </div>
-                        </div>
-
-                    </div>
 
                 </div>
 
+                <div className="contact-content">
 
-                {/* ================= RIGHT SIDE ================= */}
+                    <div className="contact-form">
 
-                <div className="contact-form-box">
+                        <form onSubmit={handleSubmit}>
 
-                    <h2>Send Us a Message</h2>
+                            <div className="form-field">
+                                <label htmlFor="fullName"> Name </label>
+                                <input type="text" id="fullName" name="fullName" required />
+                            </div>
+                            <div className="form-field">
+                                <label htmlFor="number"> Phone </label>
+                                <input type="text" id="number" name="number" required />
+                            </div>
 
-                    <p className="form-description">
-                        Fill in the details below and our team will get
-                        back to you shortly.
-                    </p>
+                            <div className="form-field">
+                                <label htmlFor="email">Email</label>
+                                <input type="email" id="email" name="email" required />
+                            </div>
+                            <div className="form-field">
+                                <label htmlFor="subject">Subject</label>
+                                <input type="email" id="subject" name="subject" required />
+                            </div>
 
+                            <div className="form-field">
+                                <label htmlFor="message">Message</label>
+                                <textarea id="message" name="message" rows="3" required></textarea>
+                            </div>
 
-                    <form>
+                            <button type="submit" className="contact-submit"> Send</button>
 
-                        {/* FULL NAME */}
+                        </form>
 
-                        <div className="form-group">
-
-                            <label htmlFor="fullName">
-                                Full Name
-                            </label>
-
-                            <input
-                                type="text"
-                                id="fullName"
-                                name="fullName"
-                                placeholder="Enter your full name"
-                                required
-                            />
-
-                        </div>
-
-
-                        {/* PHONE */}
-
-                        <div className="form-group">
-
-                            <label htmlFor="phone">
-                                Phone
-                            </label>
-
-                            <input
-                                type="tel"
-                                id="phone"
-                                name="phone"
-                                placeholder="Enter your phone number"
-                                required
-                            />
-
-                        </div>
+                    </div>
 
 
-                        {/* EMAIL */}
+                    <div className="contact-info">
 
-                        <div className="form-group">
+                        <div className="info-block">
 
-                            <label htmlFor="email">
-                                Email Address
-                            </label>
+                            <h6>
+                                Visit us
+                            </h6>
 
-                            <input
-                                type="email"
-                                id="email"
-                                name="email"
-                                placeholder="name@example.com"
-                                required
-                            />
+                            <p>
+                                AM ENTERPRISES<br />
+                                Karnataka, India
+                            </p>
 
                         </div>
 
 
-                        {/* SUBJECT */}
+                        <div className="info-block">
 
-                        <div className="form-group">
+                            <h5>
+                                Talk to us
+                            </h5>
 
-                            <label htmlFor="subject">
-                                Subject
-                            </label>
+                            <p>
+                                +91 98765 43210<br />
+                                info@amenterprises.com
+                            </p>
 
-                            <input
-                                type="text"
-                                id="subject"
-                                name="subject"
-                                placeholder="Enter subject"
-                                required
-                            />
+                        </div>
+                        <div className="social-links">
+
+                            <a href="#" aria-label="Facebook">
+                                <FaFacebookF />
+                            </a>
+
+                            <a href="#" aria-label="X">
+                                <FaXTwitter />
+                            </a>
+
+                            <a href="#" aria-label="Instagram">
+                                <FaInstagram />
+                            </a>
+
+                            <a href="#" aria-label="LinkedIn">
+                                <FaLinkedinIn />
+                            </a>
+
+                            <a href="#" aria-label="YouTube">
+                                <FaYoutube />
+                            </a>
 
                         </div>
 
-
-                        {/* MESSAGE */}
-
-                        <div className="form-group">
-
-                            <label htmlFor="message">
-                                Message
-                            </label>
-
-                            <textarea
-                                id="message"
-                                name="message"
-                                rows="5"
-                                placeholder="Write your message..."
-                                required
-                            ></textarea>
-
-                        </div>
-
-
-                        {/* CHECKBOX */}
-
-                        <div className="form-check">
-
-                            <input
-                                type="checkbox"
-                                id="privacy"
-                                name="privacy"
-                                required
-                            />
-
-                            <label htmlFor="privacy">
-                                I agree to be contacted regarding my enquiry.
-                            </label>
-
-                        </div>
-
-
-                        {/* BUTTON */}
-
-                        <button
-                            type="submit"
-                            className="contact-submit"
-                        >
-                            SEND MESSAGE
-                        </button>
-
-                    </form>
+                    </div>
 
                 </div>
 
