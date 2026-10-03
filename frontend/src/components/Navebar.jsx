@@ -1,6 +1,7 @@
 import React from 'react'
 import "../styles/Navbar.css"
 import image from "../assets/image.png"
+import { Link, Links } from 'react-router'
 
 const Navebar = () => {
     return (
@@ -18,11 +19,12 @@ const Navebar = () => {
 
         <div className='nav-links'>
 
-           <a href="#home">HOME</a>
-           <a href="#about">ABOUT</a>
-           <a href="#services">SERVICES</a>
-           <a href="#vision">VISION</a>
-           <a href="#contact">CONATCT</a>
+           <Link to="/">HOME</Link>
+           <Link  to="about">ABOUT</Link>
+           <Link to="/services">SERVICES</Link>
+            <Link to="/vision">VISION</Link>
+           <Link  to="/contact">CONTACT</Link>
+           <a href="#contact">LOGIN</a>
         </div>
 
     </div>
